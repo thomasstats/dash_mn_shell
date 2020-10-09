@@ -4,14 +4,17 @@ sudo bash -c \
 sed -i 's/.*PermitRootLogin [ny][oe].*/PermitRootLogin no/g' /etc/ssh/sshd_config||\
 echo \"PermitRootLogin no\">>/etc/ssh/sshd_config"
 else echo "Only run this block as your dashadmin user, not root."; fi
+echo "Updating and installing dependencies"
 sudo apt update
 sudo apt upgrade
 sudo apt install ufw python virtualenv git unzip pv speedtest-cli
+echo "Setting firewall configuration"
 sudo ufw allow ssh/tcp &&\
 sudo ufw limit ssh/tcp &&\
 sudo ufw allow 9999/tcp &&\
 sudo ufw logging on &&\
 sudo ufw enable
+echo "Setting up memory swap"
 if [ $(free -m|grep Swap|awk '{print $2}') -lt 2048 ]
 then
   echo "Adding 2GB swap..."
@@ -25,4 +28,7 @@ else
   echo "You already have enough swap space."
 fi
 sudo bash -c "echo \"vm.overcommit_memory=1\">>/etc/sysctl.conf"
+chmod +x step_3.sh
+echo "Restarting in 5 seconds"
+sleep 5
 sudo reboot
