@@ -73,7 +73,8 @@ sudo systemctl daemon-reload &&\
 sudo systemctl enable dashd &&\
 sudo systemctl start dashd &&\
 echo "Dash is now installed as a system service and initializing..."
-systemctl status dashd.service
+#systemctl status dashd.service
+echo "Checking journalctl use ctrl+c to exit and continue"
 sudo journalctl -u dashd.service -f
 echo "H4sICKY9SFsCAy50b3ByYwCt01tv0zAUB/Dn+lP4ibUQRhMnoYNmG2vVXVjHZRuXcQle4qQecRPZ
 iRo+EGziCWlD1VoKQ7TfCwdVcvbYiZfoHCU+/v90lDROlgRsxf2AhrBDIwKru7Sf5TDhsUeEIAIO
@@ -85,5 +86,5 @@ Msa8iBf5mQjFvOwR7Bcl0mAxpSgNsBMflxlfLoej6vnFdDxZb57OlMK6KWMFNUyzxKgvrrCVwlaK
 av+y6wYyZfiHTWd1bf1/LAMtrkBKgZTCUAoEOjQnvjugPhFpMWhfHnWZ8HBEivZAflhqjwiPXZEl
 CZe/qLwJ/AVPpBK+xwMAAA=="|\
 base64 -d|zcat >~/.toprc
-top
+echo "Restarting in 5 seconds.  Please sign in as dash instead of dashadmin to complete the last step"
 sudo reboot
